@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Properties>
+    <Property name="LOGLEVEL">INFO</Property>
+    <Property name="hostname">${env:HOSTNAME}</Property>
+    <Property name="host_graylog">${env:GRAYLOG_HOST}</Property>
+    <Property name="port_graylog">${env:GRAYLOG_PORT}</Property>
+    <Property name="tags">${env:GROUP_ID},${env:ENVIRONMENT_NAME}</Property>
+  </Properties>
+  <Appenders>
+    <Socket name="SyslogAccess" host="${host_graylog}" port="${port_graylog}" protocol="UDP">
+      <PatternLayout pattern="&lt;14&gt;%d{MMM dd HH:mm:ss} ${hostname} router: %m\ttags: ${tags},ACCESS%n"/>
+    </Socket>
+    <Socket name="SyslogApp" host="${host_graylog}" port="${port_graylog}" protocol="UDP">
+      <PatternLayout pattern="&lt;14&gt;%d{MMM dd HH:mm:ss} ${hostname} router: [%p] %t %enc{%m} %exception\ttags: ${tags},APP%n"/>
+    </Socket>
+  </Appenders>
+  <Loggers>
+    <Logger name="org.xnio.listener" level="FATAL" additivity="false"/>
+    <Logger name="io.undertow.request" level="FATAL" additivity="false"/>
+    <Logger name="io.galeb.router.handlers.completionListeners.AccessLogCompletionListener" level="debug" additivity="false">
+      <AppenderRef ref="SyslogAccess" level="${env:LOGLEVEL}"/>
+    </Logger>
+    <Root level="trace">
+      <AppenderRef ref="SyslogApp" level="${env:LOGLEVEL}"/>
+    </Root>
+  </Loggers>
+</Configuration>
