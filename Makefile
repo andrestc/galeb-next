@@ -1,6 +1,6 @@
 RPM_VER=4.0.7
-VERSION=${RPM_VER}rc3
-RELEASE=0rc3
+VERSION=${RPM_VER}rc4
+RELEASE=0rc4
 
 deploy-snapshot:
 	mvn clean install -DskipTests deploy:deploy -DaltDeploymentRepository=oss-jfrog::default::http://oss.jfrog.org/artifactory/oss-snapshot-local
