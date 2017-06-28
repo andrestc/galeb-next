@@ -28,7 +28,7 @@ dist: galeb-next
         cp -av ../../../wrapper . && \
         cp -av ../../../confd/confd-0.11.0-linux-amd64 confd && \
         cp -v ../../wrapper.conf ../conf/ && \
-        [ -f ../../router/log4j.xml ] && cp -v ../../router/log4j.xml ../conf/ || true && \
+        [ -f ../../log4j.xml ] && cp -v ../../log4j.xml ../conf/ || true && \
         [ -f ../../sysctl.sh ] && cp -av ../../sysctl.sh . || true  && \
         cp -v ../galeb-$$service-${VERSION}-SNAPSHOT.jar galeb-$$service.jar && \
         cp -av ../../initscript wrapper/bin/ && \
