@@ -3,15 +3,15 @@
   <Properties>
     <Property name="LOGLEVEL">INFO</Property>
     <Property name="hostname">${env:HOSTNAME}</Property>
-    <Property name="host_graylog">${env:GRAYLOG_HOST}</Property>
-    <Property name="port_graylog">${env:GRAYLOG_PORT}</Property>
+    <Property name="syslog_host">${env:SYSLOG_HOST}</Property>
+    <Property name="syslog_port">${env:SYSLOG_PORT}</Property>
     <Property name="tags">${env:GROUP_ID},${env:ENVIRONMENT_NAME}</Property>
   </Properties>
   <Appenders>
-    <Socket name="SyslogAccess" host="${host_graylog}" port="${port_graylog}" protocol="UDP">
+    <Socket name="SyslogAccess" host="${syslog_host}" port="${syslog_port}" protocol="UDP">
       <PatternLayout pattern="&lt;14&gt;%d{MMM dd HH:mm:ss} ${hostname} router: %m\ttags: ${tags},ACCESS%n"/>
     </Socket>
-    <Socket name="SyslogApp" host="${host_graylog}" port="${port_graylog}" protocol="UDP">
+    <Socket name="SyslogApp" host="${syslog_host}" port="${syslog_port}" protocol="UDP">
       <PatternLayout pattern="&lt;14&gt;%d{MMM dd HH:mm:ss} ${hostname} router: [%p] %t %enc{%m} %exception\ttags: ${tags},APP%n"/>
     </Socket>
   </Appenders>
